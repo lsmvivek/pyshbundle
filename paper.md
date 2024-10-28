@@ -1,8 +1,11 @@
 ---
-title: 'PySHbundle: A Python software to convert GRACE Spherical Harmonic Coefficients to gridded mass change fields'
+title: 'PySHbundle: A Python tool for processing GRACE Gravimetry data into Global Surface Mass Change Datasets'
 tags:
   - Python
   - GRACE
+  - Geodesy
+  - Gravimetry
+  - Terrestrial Water Storage
   - Spherical Harmonic Analysis
   - Spherical Harmonic Synthesis
   - GRACE Data Driven Correction
