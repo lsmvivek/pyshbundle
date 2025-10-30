@@ -221,7 +221,7 @@ def lrecur(inn, x, m, lmax):
     Returns:
         (int): Updated value after performing the recursion based on parameters.
     """
-    for ll in np.arange(int(m)+1,lmax+1,1):
+    for ll in np.arange(int(m)+1, lmax+1):
        col   = ll - m+1			                                                # points to the next collumn of ptmp
        root1 = np.sqrt( (2*ll+1)*(2*ll-1)/((ll-m)*(ll+m)) ).real 
        root2 = np.sqrt( (2*ll+1)*(ll+m-1)*(ll-m-1) / ( (2*ll-3)*(ll-m)*(ll+m) ) ).real

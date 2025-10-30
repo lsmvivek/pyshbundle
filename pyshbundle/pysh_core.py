@@ -450,7 +450,6 @@ def gsha(f, method: str, grid: str = None, lmax: int = -9999):
             
     elif method == 'mean':
         for m in range(L+1):
-            print(m)
             #l = np.arange(m,L+1).reshape(L+1-m,1)
             #l = l.T
             
@@ -708,7 +707,6 @@ def GRACE_Data_Driven_Correction_Vishwakarma(F, cf, GaussianR, basins):
                 #Deviation integral timeseries
                 bfDevRegAv[m][rbasin] = np.sum((fF * Rb - FilteredTS[m][rbasin]) * filRb * Area) / np.sum(Rb * Area) #working 2022-10-20
                 bbfDevRegAv[m][rbasin] = np.sum((ffF * Rb - filfilts[m][rbasin]) * filRb * Area) / np.sum(Rb * Area)
-                print(m)
                 
                 
        
