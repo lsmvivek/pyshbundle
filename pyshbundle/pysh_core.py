@@ -454,7 +454,7 @@ def gsha(f, method: str, grid: str = None, lmax: int = -9999):
             #l = l.T
             
             
-            l = np.array([np.arange(m,L+1, 1)])
+            l = np.array([np.arange(m, L+1)])
         # l = np.array([[m]])
             
             p = iplm(l,m,theRAD)
