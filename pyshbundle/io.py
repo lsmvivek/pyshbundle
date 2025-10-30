@@ -466,9 +466,9 @@ def parse_jpl_file(file_path: str):
             info_lines = file.readlines()
             num_lines = len(info_lines)
 
-            for i in range(len(info_lines)):
+            for i, line in enumerate(info_lines):
                 # find the end of header sentence in the text file
-                if str(info_lines[i]) == str(b'# End of YAML header\n',):
+                if str(line) == str(b'# End of YAML header\n',):
                     end_of_header_idx = i
                     break
 
@@ -553,8 +553,8 @@ def parse_lines(line, parse_fmt='\s+'):
 def find_word(info_lines, search_key):
     # finding the target word in the read lines
 
-    for i in range(len(info_lines)):
-        parsed_array = parse_lines(info_lines[i], parse_fmt='\s+')
+    for i, line in enumerate(info_lines):
+        parsed_array = parse_lines(line, parse_fmt='\s+')
         if search_key in parsed_array:
             search_idx = i
             break
@@ -576,9 +576,9 @@ def parse_csr_file(file_path: str):
             info_lines = file.readlines()
             num_lines = len(info_lines)
 
-            for i in range(len(info_lines)):
+            for i, line in enumerate(info_lines):
                 # find the index of line which indicates end of header info
-                if str(info_lines[i]) == str(b'# End of YAML header\n',):
+                if str(line) == str(b'# End of YAML header\n',):
                     end_of_header_idx = i
                     break
         
@@ -618,8 +618,8 @@ def parse_itsg_file(file_path):
             info_lines = file.readlines()
             num_lines = len(info_lines)
 
-            for i in range(len(info_lines)):
-                if str(info_lines[i]) == str('end_of_head ==================================================================================\n',):
+            for i, line in enumerate(info_lines):
+                if str(line) == str('end_of_head ==================================================================================\n',):
                     end_of_header_idx = i
                     break
 
@@ -670,13 +670,13 @@ def parse_tn13_header(header_info):
         # - 1, 2, 3, 4, 5
 
     # finding the index of important sub-headers like Title and Notes
-    for i in range(len(header_info)):
-        if 'TITLE' in header_info[i]:
+    for i, line in enumerate(header_info):
+        if 'TITLE' in line:
             title_idx = i
             break
     
-    for i in range(len(header_info)):
-        if 'SPECIAL NOTES' in header_info[i]:
+    for i, line in enumerate(header_info):
+        if 'SPECIAL NOTES' in line:
             notes_idx = i
             break
     

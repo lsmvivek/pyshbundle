@@ -593,10 +593,16 @@ def grule(n: int):
     fx = d1 - h*e1*(pk+(h/2)*(dpn+(h/3)*(d2pn+(h/4)*(d3pn+(0.2*h)*d4pn))))
     wf = [2 * (1 - np.power(bp,2))]/(fx*fx)
                  
-                
-    for i in range(len(bp),n):
-        bp = np.append(bp,[0])
-        wf = np.append(wf,[0])
+    # Pre-allocate arrays instead of using np.append in loop
+    bp_len = len(bp)
+    if bp_len < n:
+        # Create new arrays with correct size
+        bp_new = np.zeros(n)
+        wf_new = np.zeros(n)
+        bp_new[:bp_len] = bp
+        wf_new[:bp_len] = wf
+        bp = bp_new
+        wf = wf_new
     
     if ((m)+(m)) != (n):
         m = m-1
@@ -650,7 +656,7 @@ def neumann(inn):
         elif min(inn.shape) == 1: #1st Neumann method #Size gives 2 outputs for 2d array in matlab; for row and column
             x = inn
             theRAD = np.arccos(x) #x in radian
-            l = np.array(list(range(len(x))))
+            l = np.arange(len(x))
             pp = plm(l, theRAD)
             
             rr = list([2])

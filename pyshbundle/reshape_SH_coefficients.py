@@ -132,8 +132,8 @@ def clm2sc(data_mat: np.ndarray, lmax: int, sigma_flag=False):
     slm_std_dev = data_mat[:, 5]
 
     i = 0
-    for index1 in range(0,lmax+1, 1):
-        for index2 in range(0,index1+1, 1):
+    for index1 in range(lmax+1):
+        for index2 in range(index1+1):
             
             sc_mat[index1, lmax-index2] = slm[i]
             sc_mat[index1, lmax+index2+1] = clm[i]

@@ -156,7 +156,7 @@ def gshs(field, quant = 'none', grd = 'mesh', n = -9999, h = 0, jflag = 1):
     l = np.arange(0, lmax+1)
     transf = np.array([eigengrav(lmax, quant, h)])[0, :, :].T
     
-    field = field * np.matmul(transf, np.ones((1, 2*lmax+1)), dtype='float')
+    field = field * (transf @ np.ones((1, 2*lmax+1), dtype='float'))
     
     
 
@@ -185,7 +185,7 @@ def gshs(field, quant = 'none', grd = 'mesh', n = -9999, h = 0, jflag = 1):
     
     
     
-    for m in range(1,lmax+1,1):
+    for m in range(1, lmax+1):
         c = field[m:lmax+1,lmax+m]
         s = field[m:lmax+1,lmax-m]
         
@@ -208,7 +208,7 @@ def gshs(field, quant = 'none', grd = 'mesh', n = -9999, h = 0, jflag = 1):
 
 
     if grd =='block' or grd == 'cell': 
-      m      = np.arange(0,abcols,1)
+      m      = np.arange(abcols)
       cshift = np.array([np.ones(nlat)], dtype='float').T * np.array([np.cos(m*np.pi/2/n)], dtype='float');	# cshift/sshift describe the 
       sshift = np.array([np.ones(nlat)], dtype='float').T * np.array([np.sin(m*np.pi/2/n)], dtype='float');	# half-blocksize lambda shift.
       atemp  =  cshift*a + sshift*b
@@ -665,7 +665,7 @@ def GRACE_Data_Driven_Correction_Vishwakarma(F, cf, GaussianR, basins):
     
 
     
-    for rbasin in range(0, cid):
+    for rbasin in range(cid):
         #Get the basin functions ready
        
         #Basin functions, filtered basin function and transfer function Kappa
@@ -680,7 +680,7 @@ def GRACE_Data_Driven_Correction_Vishwakarma(F, cf, GaussianR, basins):
     
         fF = np.zeros((fFld__.shape[0],fFld__.shape[1]), dtype='double')
         ffF = np.zeros((fFld__.shape[0],fFld__.shape[1]), dtype='double')
-        for m in range(0,r):
+        for m in range(r):
             
             
             fF = np.concatenate((fFld[m,:,int(fF.shape[1]/2):], fFld[m,:,:int(fF.shape[1]/2)]), axis=1)
@@ -716,7 +716,7 @@ def GRACE_Data_Driven_Correction_Vishwakarma(F, cf, GaussianR, basins):
     
     b = list()
     bl = list()
-    for i in range(0, cid):
+    for i in range(cid):
                 
         A = np.ones([60,2])
         A[:,1] = naninterp(bbfDevRegAv[:, i]) #Pchip interpolate should contain atleast two elements
@@ -746,7 +746,7 @@ def GRACE_Data_Driven_Correction_Vishwakarma(F, cf, GaussianR, basins):
     
     #Compute the near true leakage
     
-    for i in range(0, cid):   
+    for i in range(cid):   
         ftsleaktotal[:,i] = naninterp(tsleaktotalf[:,i]) #Replaces gaps (NaN values) with an itnerpolated value in the leakage time series from once filtered fields
         fftsleaktotal[:,i] = naninterp(tsleaktotalff[:,i]) #replace the gaps (NaN values) with an interpolated value in leakage time series from twice filtered fields
         

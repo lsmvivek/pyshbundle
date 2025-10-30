@@ -91,7 +91,7 @@ def lovenr(lmax: int):
     """
     l  = [0,  1,    2,    3,    4,    5,   6,   7,   8,   9,  10,  12,  15,  20,  30,  40,  50,  70, 100, 150, 200]
     kl = numpy.divide([0,270,-3030,-1940,-1320,-1040,-890,-810,-760,-720,-690,-640,-580,-510,-400,-330,-270,-200,-140,-100, -700],1e4)
-    n = range(0, lmax+1, 1)
+    n = range(lmax+1)
     kn = numpy.interp(n,l,kl)
     return(kn)
 
@@ -196,7 +196,7 @@ def lovenrPREM(lmax:int, frame):
         lovenrPREM.exit('Please choose a compatible frame of reference: one of CM, CF, or CE')
     
     
-    n = range(0, lmax+1, 1)
+    n = range(lmax+1)
     kn = numpy.interp(n,l,kl)
     hn = numpy.interp(n,l,hl)
     ln = numpy.interp(n,l,ll)

@@ -79,12 +79,10 @@ def TWSCalc(data, lmax: int, gs: float, r:float, m: int):
     grid_y = int(180/gs)
     grid_x = int(360/gs)
     tws_f = np.zeros([m,grid_y,grid_x], dtype ='float')
-    for i in tqdm(range(0,m,1)):
+    for i in tqdm(range(m)):
         field = SC[i,0:lmax+1,96-lmax:96+lmax+1]
-        shfil = np.zeros([lmax+1,2*lmax+1])
-
-        for j in range(0,2*lmax+1,1):
-            shfil[:,j] = gfilter[:,0] * field[:,j]
+        # Vectorized operation: use broadcasting instead of loop
+        shfil = gfilter * field
         
         quant = 'water' 
         grd = 'cell'
@@ -114,12 +112,8 @@ def apply_gaussian(sc_coeff, gaussian_coeff, lmax):
         (numpy.ndarray): Filtered spherical harmonics coefficients in SC format.
     """
     
-    # filtered SH Coeff
-    shfil = np.zeros([lmax+1, 2 * lmax+1])
-
-    # applying filter on substracted coeff
-    for j in range(0, 2*lmax+1, 1):
-        shfil[:,j] = gaussian_coeff[:,0] * sc_coeff[:,j]
+    # Vectorized operation: use broadcasting instead of loop for better performance
+    shfil = gaussian_coeff * sc_coeff
     
     return shfil
 
